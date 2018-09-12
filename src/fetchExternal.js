@@ -1,7 +1,12 @@
 const fetchCall = async (api) => {
-  const res = await fetch(api);
-  const data = await res.json();
-  return data;
+  try {
+    const response = await fetch(api);
+    if (!response.ok) throw Error(response.statusText);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return error.toString();
+  }
 }
 
 export default fetchCall;
